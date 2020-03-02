@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- jQuery -->
+    <script type="text/javascript" src="assets/js/lib/jquery-3.4.1.js"></script>
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link type="text/css" rel="stylesheet" href="assets/css/waterjugs.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300&display=swap" rel="stylesheet">
+
+    <title>Water Jugs</title>
+</head>
+<body>
+<header>
+<h1 class="text-center">Water Jug Riddle</h1>
+<p class="text-center">Using these 3 and 5 gallon jugs, fill one of the jugs with exactly 4 gallons of
+    water.</p>
+</header>
+
+<section class="container-fluid px-0">
+    <div class="row justify-content-around align-items-end mt-5">
+        <div class="jugs col-4">
+            <img src="assets/img/lg_wj.png" alt="" class="img-fluid sm-jug">
+            <div id="sm-count" class="counter">0</div>
+        </div>
+        <div class="jugs col-4">
+            <img src="assets/img/lg_wj.png" alt="" class="img-fluid lg-jug">
+            <div id="lg-count" class="counter">0</div>
+        </div>
+    </div>
+</section>
+<!-- buttons -->
+<div class="buttons container-fluid px-0">
+    <div class="text-center row align-items-center">
+        <div class="col-6 mt-5">
+            <div class="btn-group-sm" role="group">
+                <button type="button" class="sm-fill btn btn-info">Fill Small</button>
+                <button type="button" class="sm-trans btn btn-secondary">Transfer to Large</button>
+                <button type="button" class="sm-empty btn btn-danger">Empty Small</button>
+            </div>
+        </div>
+        <div class="col-6 mt-5">
+            <div class="btn-group-sm" role="group">
+                <button type="button" class="lg-fill btn btn-info">Fill Large</button>
+                <button type="button" class="lg-trans btn btn-secondary">Transfer to Small</button>
+                <button type="button" class="lg-empty btn btn-danger">Empty Large</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="assets/js/waterjugs.js"></script>
+</body>
+</html>
