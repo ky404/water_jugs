@@ -5,7 +5,6 @@ var jugs = {
     smNum: 0,
     lgNum: 0,
     targetNum: 4,
-
 };
 
 var smNum = 0;
@@ -21,13 +20,8 @@ var smTransButton = $(".sm-trans");
 var lgTransButton = $(".lg-trans");
 var smEmptyButton = $(".sm-empty");
 var lgEmptyButton = $(".lg-empty");
+var resetButton = $(".reset");
 
-
-
-
-// fill small button
-// if < 3 change smCounter to 3 (smalljug)
-// else alert jug is full
 
 function smFill() {
     if (jugs.smNum < jugs.smCap) {
@@ -40,7 +34,9 @@ function smFill() {
 //transfer from small jug
 function smTransfer() {
     let lgDiff = Number(jugs.lgCap - jugs.lgNum);
-    if (jugs.lgNum < jugs.lgCap) {
+    if (jugs.smNum === 0) {
+        alert("Nothing to transfer");
+    } else if (jugs.lgNum < jugs.lgCap) {
         if (jugs.lgNum >= jugs.smCap) {
             jugs.lgNum = (jugs.smNum + lgDiff);
             jugs.smNum = (jugs.smNum - lgDiff);
@@ -51,33 +47,34 @@ function smTransfer() {
             jugs.smNum = 0;
             smNumDisplay.text(jugs.smNum);
             lgNumDisplay.text(jugs.lgNum);
-            // lgNumDisplay = (jugs.smNum + jugs.lgNum);
-            // jugs.lgNum = Number(lgNumDisplay);
-            // smNumDisplay = (jugs.smNum - smDiff);
-            // jugs.smNum = Number(smNumDisplay);
-            //todo need to update smNum and lgNum
         }
     } else {
         alert("Large Jug is Already Full");
     }
+    win()
 }
 
 //transfer from large jug
 function lgTransfer() {
     let smDiff = Number(jugs.smCap - jugs.smNum);
-    if (jugs.smNum < jugs.smCap) {
+    if (jugs.lgNum === 0) {
+        alert("Nothing to transfer");
+    } else if (jugs.smNum < jugs.smCap) {
         if (jugs.lgNum < jugs.smCap) {
-            smNumDisplay = (jugs.lgNum - jugs.smNum);
-            lgNumDisplay = (jugs.smNum);
-            jugs.smNum = parseInt(smNumDisplay.text());
-            jugs.lgNum = parseInt(lgNumDisplay.text());
+            smNumDisplay.text(jugs.lgNum - jugs.smNum);
+            jugs.lgNum = jugs.smNum;
+            jugs.smNum = Number(smNumDisplay.text());
+            lgNumDisplay.text(jugs.lgNum);
         } else {
-            smNumDisplay = smDiff;
-            lgNumDisplay = (jugs.lgNum - smDiff);
+            jugs.smNum = smDiff;
+            smNumDisplay.text(smDiff);
+            jugs.lgNum = (jugs.lgNum - smDiff);
+            lgNumDisplay.text(jugs.lgNum);
         }
     } else {
         alert("Small Jug is Already Full");
     }
+    win()
 }
 
 function lgFill() {
@@ -99,29 +96,67 @@ function lgEmpty() {
     lgNumDisplay.text(0);
 }
 
-//todo event listeners
+function win() {
+    if (jugs.lgNum === 4) {
+        $('h1').text("You Did It!").css({
+            color: 'green',
+            fontSize: '50px',
+        });
+            $('p').toggle('hidden');
+            $('.reset').toggleClass('reset');
+        hideButtons()
+    }
+    }
 
-smFillButton.on("click", function () {
-    smFill()
-});
+    function hideButtons() {
+    $('.btn-group-sm').toggleClass('hidden');
+    }
 
-lgFillButton.on("click", function () {
-    lgFill()
-});
+    function unhideButtons(){
+        $('.btn-group-sm').toggleClass('hidden');
+    }
 
-smTransButton.on("click", function () {
-    smTransfer()
-});
+    function reset() {
+        jugs.smNum = 0;
+        jugs.lgNum = 0;
+        smNumDisplay.text(smNum);
+        lgNumDisplay.text(lgNum);
+        $('p').toggle('visible');
+        $('h1').text('Water Jug Riddle').css({
+            color: 'lightblue',
+            textShadow: '2px 2px gray'
+        });
+        unhideButtons();
+    }
 
-lgTransButton.on("click", function () {
-    lgTransfer()
-});
+//event listeners
 
-smEmptyButton.on("click", function () {
-    smEmpty()
-});
+    smFillButton.on("click", function () {
+        smFill()
+    });
 
-lgEmptyButton.on("click", function () {
-    lgEmpty()
-});
+    lgFillButton.on("click", function () {
+        lgFill()
+    });
+
+    smTransButton.on("click", function () {
+        smTransfer()
+    });
+
+    lgTransButton.on("click", function () {
+        lgTransfer()
+    });
+
+    smEmptyButton.on("click", function () {
+        smEmpty()
+    });
+
+    lgEmptyButton.on("click", function () {
+        lgEmpty()
+    });
+
+    resetButton.on("click", function() {
+        reset();
+        $(this).toggleClass('reset');
+    });
 
